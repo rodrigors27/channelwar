@@ -10,14 +10,14 @@ g = getCmd(SnmpEngine(), CommunityData(varCommunity, mpModel=1), UdpTransportTar
 
 # this is what you get from SNMP agent
 error_indication, error_status, error_index, var_binds = next(g)
-#print(var_binds)
+print(var_binds)
 
 if not error_indication and not error_status:
 # each element in this list matches a sequence of `ObjectType`
 # in your request.
 # In the code above you requested just a single `ObjectType`,
 # thus we are taking just the first element from response
-    oid, value = var_binds[0]
+    oid, value = var_binds[1]
     print(oid, '=', value)
     #channel24 = value
     #print(channel24)
@@ -28,14 +28,14 @@ h = getCmd(SnmpEngine(), CommunityData(varCommunity, mpModel=1), UdpTransportTar
 
 # this is what you get from SNMP agent
 error_indication, error_status, error_index, var_binds = next(h)
-#print(var_binds)
+print(var_binds)
 
 if not error_indication and not error_status:
 # each element in this list matches a sequence of `ObjectType`
 # in your request.
 # In the code above you requested just a single `ObjectType`,
 # thus we are taking just the first element from response
-    oid, value = var_binds[0]
+    oid, value = var_binds[1]
     print(oid, '=', value)
     #channel5 = value
     #print(channel5)
