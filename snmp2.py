@@ -9,37 +9,51 @@ varPort = 161
 g = getCmd(SnmpEngine(), CommunityData(varCommunity, mpModel=1), UdpTransportTarget((varServer, varPort)), ContextData(), ObjectType(ObjectIdentity('1.3.6.1.4.1.9.9.272.1.1.1.8.1.2.1')))
 
 # this is what you get from SNMP agent
-error_indication, error_status, error_index, var_binds = next(g)
-print(var_binds)
+errorIndication, errorStatus, errorIndex, varBinds = next(g)
+#print(var_binds)
 
-if not error_indication and not error_status:
+#if not error_indication and not error_status:
 # each element in this list matches a sequence of `ObjectType`
 # in your request.
 # In the code above you requested just a single `ObjectType`,
 # thus we are taking just the first element from response
-    oid, value = var_binds[1]
-    print(oid, '=', value)
+#    oid, value = var_binds[1]
+#    print(oid, '=', value)
     #channel24 = value
     #print(channel24)
 
+if errorIndication:
+    print(errorIndication)
+elif errorStatus:
+    print('%s at %s' % (errorStatus.prettyPrint(),
+                        errorIndex and varBinds[int(errorIndex) - 1][0] or '?'))
+else:
+    for varBind in varBinds:
+        print(' = '.join([x.prettyPrint() for x in varBind]))
 
 
 h = getCmd(SnmpEngine(), CommunityData(varCommunity, mpModel=1), UdpTransportTarget((varServer, varPort)), ContextData(), ObjectType(ObjectIdentity('1.3.6.1.4.1.9.9.272.1.1.1.8.1.2.2')))
 
 # this is what you get from SNMP agent
-error_indication, error_status, error_index, var_binds = next(h)
-print(var_binds)
+errorIndication, errorStatus, errorIndex, varBinds = next(h)
+#print(var_binds)
 
-if not error_indication and not error_status:
+#if not error_indication and not error_status:
 # each element in this list matches a sequence of `ObjectType`
 # in your request.
 # In the code above you requested just a single `ObjectType`,
 # thus we are taking just the first element from response
-    oid, value = var_binds[1]
-    print(oid, '=', value)
+#    oid, value = var_binds[1]
+#    print(oid, '=', value)
     #channel5 = value
     #print(channel5)
 
-
-
+if errorIndication:
+    print(errorIndication)
+elif errorStatus:
+    print('%s at %s' % (errorStatus.prettyPrint(),
+                        errorIndex and varBinds[int(errorIndex) - 1][0] or '?'))
+else:
+    for varBind in varBinds:
+        print(' = '.join([x.prettyPrint() for x in varBind]))
 
