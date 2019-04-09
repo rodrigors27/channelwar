@@ -1,6 +1,22 @@
 #!/usr/bin/python3.5
 
+import threading
+import os, time
+import random
 from scapy.all import *
+
+def hopper(iface):
+    n = 1
+    stop_hopper = False
+    while not stop_hopper:
+        time.sleep(0.50)
+        os.system('iwconfig %s channel %d' % (iface, n))
+        print("Current Channel %d" % (n))
+        dig = int(random.random() * 12)
+        if dig != 0 and dig != n:
+            n = dig
+
+
 
 F_bssids = []    # Found BSSIDs
 def findSSID(pkt):
