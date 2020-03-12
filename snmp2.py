@@ -3,7 +3,7 @@
 from pysnmp.hlapi import *
 
 varCommunity = "C1sco"
-varServer = "192.168.15.107"
+varServer = "192.168.16.104"
 varPort = 161
 
 g = getCmd(SnmpEngine(), CommunityData(varCommunity, mpModel=1), UdpTransportTarget((varServer, varPort)), ContextData(), ObjectType(ObjectIdentity('1.2.840.10036.1.1.1.1.1')))
@@ -29,14 +29,20 @@ elif errorStatus:
                         errorIndex and varBinds[int(errorIndex) - 1][0] or '?'))
 else:
     for varBind in varBinds:
-        print(' = '.join([x.prettyPrint() for x in varBind]))
+        #print(' = '.join([x.prettyPrint() for x in varBind]))
+        #print(' = '.join([x.prettyPrint() for x in varBind]))
+        parta,partb = varBind
+        full = str(partb.prettyPrint())
+        onlymac = full.strip('0x')
+        #print(type(onlymac))
+        print(onlymac)
 
 
 h = getCmd(SnmpEngine(), CommunityData(varCommunity, mpModel=1), UdpTransportTarget((varServer, varPort)), ContextData(), ObjectType(ObjectIdentity('1.2.840.10036.1.1.1.1.2')))
 
 # this is what you get from SNMP agent
 errorIndication, errorStatus, errorIndex, varBinds = next(h)
-#print(var_binds)
+#print(varBinds.ObjectName)
 
 #if not error_indication and not error_status:
 # each element in this list matches a sequence of `ObjectType`
@@ -57,11 +63,9 @@ else:
     for varBind in varBinds:
         #print(' = '.join([x.prettyPrint() for x in varBind]))
         parta,partb = varBind
-        print(parta)
-        type(partb)
-        print(ObjectIdentifier(partb_value))
-        #print(str(partb.defaultHexValue))
-        #output = OctetString.fromHexString(partb)
-        #print(output)
+        full = str(partb.prettyPrint())
+        onlymac = full.strip('0x')
+        #print(type(onlymac))
+        print(onlymac)
 
 

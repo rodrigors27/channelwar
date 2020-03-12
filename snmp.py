@@ -3,7 +3,7 @@
 from pysnmp.hlapi import *
 
 varCommunity = "C1sco"
-varServer = "192.168.15.107"
+varServer = "192.168.16.104"
 varPort = 161
 
 g = getCmd(SnmpEngine(), CommunityData(varCommunity, mpModel=1), UdpTransportTarget((varServer, varPort)), ContextData(), ObjectType(ObjectIdentity('1.2.840.10036.4.11.1.1.1')))
