@@ -6,11 +6,11 @@ varCommunity = "C1sco"
 varServer = "192.168.15.107"
 varPort = 161
 
-g = getCmd(SnmpEngine(), CommunityData(varCommunity, mpModel=1), UdpTransportTarget((varServer, varPort)), ContextData(), ObjectType(ObjectIdentity('1.3.6.1.4.1.9.9.272.1.1.1.8.1.2.1')))
+g = getCmd(SnmpEngine(), CommunityData(varCommunity, mpModel=1), UdpTransportTarget((varServer, varPort)), ContextData(), ObjectType(ObjectIdentity('1.2.840.10036.1.1.1.1.1')))
 
 # this is what you get from SNMP agent
 errorIndication, errorStatus, errorIndex, varBinds = next(g)
-#print(var_binds)
+#print(varBinds)
 
 #if not error_indication and not error_status:
 # each element in this list matches a sequence of `ObjectType`
@@ -32,7 +32,7 @@ else:
         print(' = '.join([x.prettyPrint() for x in varBind]))
 
 
-h = getCmd(SnmpEngine(), CommunityData(varCommunity, mpModel=1), UdpTransportTarget((varServer, varPort)), ContextData(), ObjectType(ObjectIdentity('1.3.6.1.4.1.9.9.272.1.1.1.8.1.2.2')))
+h = getCmd(SnmpEngine(), CommunityData(varCommunity, mpModel=1), UdpTransportTarget((varServer, varPort)), ContextData(), ObjectType(ObjectIdentity('1.2.840.10036.1.1.1.1.2')))
 
 # this is what you get from SNMP agent
 errorIndication, errorStatus, errorIndex, varBinds = next(h)
@@ -55,5 +55,13 @@ elif errorStatus:
                         errorIndex and varBinds[int(errorIndex) - 1][0] or '?'))
 else:
     for varBind in varBinds:
-        print(' = '.join([x.prettyPrint() for x in varBind]))
+        #print(' = '.join([x.prettyPrint() for x in varBind]))
+        parta,partb = varBind
+        print(parta)
+        type(partb)
+        print(ObjectIdentifier(partb_value))
+        #print(str(partb.defaultHexValue))
+        #output = OctetString.fromHexString(partb)
+        #print(output)
+
 

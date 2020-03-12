@@ -20,7 +20,7 @@ if not error_indication and not error_status:
     oid, value = var_binds[0]
     #print(oid, '=', value)
     channel24 = value
-    print(channel24)
+    print('Channel 2.4Ghz: ',channel24)
 
 
 
@@ -38,7 +38,7 @@ if not error_indication and not error_status:
     oid, value = var_binds[0]
     #print(oid, '=', value)
     channel5 = value
-    print(channel5)
+    print('Channel 5Ghz: ', channel5)
 
 
 
